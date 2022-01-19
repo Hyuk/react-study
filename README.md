@@ -14,3 +14,11 @@
 * Arrow Functions
 * Async Programming & Fetch API
 * NPM (Node Package Manager)
+
+### Why learn React?
+* Organization
+* Reusable
+* Flexibility
+* Popularity & Support
+* Performance
+

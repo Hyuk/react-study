@@ -7,6 +7,7 @@ import FeedbackData from './data/FeedbackData'
 import FeedbackStats from './components/FeedbackStats'
 import FeedbackForm from './components/FeedbackFrom'
 import AboutPage from './pages/AboutPage'
+import { FeedbackProvider } from './context/FeedbackContext'
 import AboutIconLink from './components/AboutIconLink'
 
 function App() {
@@ -40,30 +41,32 @@ function App() {
     //     <Route path='/about' element={<AboutPage />} />
     //   </div>
     // </Router>
-    <Router>
-      <Header />
-      <div className='container'>
-        <Routes>
-          <Route exact path='/' element={
-            <>
-              <FeedbackForm handleAdd={addFeedback} />
-              <FeedbackStats feedback={feedback} />
-              <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
-            </>
-          }>
-          </Route>
+    <FeedbackProvider>
+      <Router>
+        <Header />
+        <div className='container'>
+          <Routes>
+            <Route exact path='/' element={
+              <>
+                <FeedbackForm handleAdd={addFeedback} />
+                <FeedbackStats />
+                <FeedbackList handleDelete={deleteFeedback} />
+              </>
+            }>
+            </Route>
 
-          <Route path='/about' element={<AboutPage />} />
+            <Route path='/about' element={<AboutPage />} />
+            
+          </Routes>
+          {/* <Card>
+            <NavLink to='/' activeClassName='active'>Home</NavLink>
+            <NavLink to='/about' activeClassName='active'>About</NavLink>
+          </Card> */}
           
-        </Routes>
-        {/* <Card>
-          <NavLink to='/' activeClassName='active'>Home</NavLink>
-          <NavLink to='/about' activeClassName='active'>About</NavLink>
-        </Card> */}
-        
-      </div>
-      <AboutIconLink />
-    </Router>
+        </div>
+        <AboutIconLink />
+      </Router>
+    </FeedbackProvider>
   )
 }
 

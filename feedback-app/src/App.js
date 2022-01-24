@@ -1,11 +1,13 @@
 import { v4 as uuidv4 } from 'uuid'
+import {BrowserRouter as Router, Routes, Route, NavLink} from 'react-router-dom'
 import {useState} from 'react'
 import Header from "./components/Header"
 import FeedbackList from "./components/FeedbackList"
 import FeedbackData from './data/FeedbackData'
 import FeedbackStats from './components/FeedbackStats'
 import FeedbackForm from './components/FeedbackFrom'
-import Card from './components/shared/Card'
+import AboutPage from './pages/AboutPage'
+import AboutIconLink from './components/AboutIconLink'
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData)
@@ -21,15 +23,47 @@ function App() {
     }
   }
   return (
-    <>
+    // <Router>
+    //   <Header />
+    //   <div className='container'>
+    //     <Route exact path='/' element={
+    //       <>
+    //       <FeedbackForm handleAdd={addFeedback} />
+    //       <FeedbackStats feedback={feedback} />
+    //       <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+    //       <AboutPage />
+    //       </>
+    //     }>
+          
+    //     </Route>
+    //     {/* <AboutPage /> */}
+    //     <Route path='/about' element={<AboutPage />} />
+    //   </div>
+    // </Router>
+    <Router>
       <Header />
       <div className='container'>
-        <FeedbackForm handleAdd={addFeedback} />
-        <FeedbackStats feedback={feedback} />
-        <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
-        <Card>Hello World</Card>
+        <Routes>
+          <Route exact path='/' element={
+            <>
+              <FeedbackForm handleAdd={addFeedback} />
+              <FeedbackStats feedback={feedback} />
+              <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+            </>
+          }>
+          </Route>
+
+          <Route path='/about' element={<AboutPage />} />
+          
+        </Routes>
+        {/* <Card>
+          <NavLink to='/' activeClassName='active'>Home</NavLink>
+          <NavLink to='/about' activeClassName='active'>About</NavLink>
+        </Card> */}
+        
       </div>
-    </>
+      <AboutIconLink />
+    </Router>
   )
 }
 
